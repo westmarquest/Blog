@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="/public/js/login.js"></script>
+
+<body><section class="main">
+  <div class="logo">
+    <div id="needsTooltip">
+        {{!-- <img src="../public/assets/EAEA82F6-48EE-46D2-94B7-86DB1E2327C3_4_5005_c.jpeg" alt="Logo"/> --}}
+    </div>
+</div>
+    <logo-elements-tooltip
+      for="needsTooltip"
+      text="Some Kind of text based tooltip content"
+      position="top"
+    ></logo-elements-tooltip>
+  </div>
+
+  <article class="login">
+    <h1>Welcome to The Best Tech Blog</h1>
+    <h5>The Best Tech- and The Best Blog - You Get It</h5>
+    <div class="login-card">
+      <h4 class="page-title">Login</h4>
+      <form class="form login-form" id="login-form">
+        <div class="form-group">
+          <label for="email-login">Email:</label>
+          <input class="form-input" type="text" id="email-login" />
+        </div>
+        <div class="form-group">
+          <label for="password-login">Password:</label>
+          <input class="form-input" type="password" id="password-login" />
+        </div>
+        <div class="form-group">
+          <button id="loginButton" class="btn btn-primary" type="submit">Login</button>
+           <button id="signupButton" class="btn btn-primary" type="submit">Sign Up</button>
+        </div>
+      </form>
+    </div>
+  </article>
+</section>
+
+
+</body>
+
+</html>

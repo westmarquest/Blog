@@ -1,0 +1,36 @@
+<div class="row justify-space-between-md">
+  <div class="login-card">
+    <h2 class="page-title">Sign Up</h2>
+    <form class="form signup-form" action="/signup" method="POST">
+      <!-- Specify action and method for form submission -->
+      <div class="form-group">
+        <label for="email-signup">Email:</label>
+        <input
+          class="form-input"
+          type="email"
+          id="email-signup"
+          name="email"
+          required
+        />
+        <!-- Use type="email" for email input and add the "required" attribute -->
+      </div>
+      <div class="form-group">
+        <label for="password-signup">Password:</label>
+        <input
+          class="form-input"
+          type="password"
+          id="password-signup"
+          name="password"
+          required
+        />
+        <!-- Add the "required" attribute -->
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary" type="submit">Sign Up</button>
+        <!-- Rename button to "Sign Up" -->
+      </div>
+    </form>
+    <p>Already have an account? <a href="/login">Login</a></p>
+    <!-- Add a link to the login page -->
+  </div>
+</div>

@@ -1,0 +1,31 @@
+<!-- main.hbs -->
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Best Tech Blog</title>
+    <script
+      src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"
+    ></script>
+
+  </head>
+  <body>
+    {{!-- {{<  header  }} --}}
+    <header>
+      <h5>The Best Tech Blog</h5>
+      <!-- Navigation menu or other header content -->
+    </header>
+
+    <!-- Main content area -->
+    <main>
+      <!-- Include the content of other pages here -->
+      {{{body}}}
+    </main>
+
+    <footer>
+      {{!-- {{<  footer  }}  --}}
+    </footer>
+  </body>
+  {{! <script src="../../public/js/login.js"></script> }}
+</html>

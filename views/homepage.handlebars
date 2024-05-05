@@ -1,0 +1,60 @@
+{{!-- <!-- homepage.hbs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    <!-- Include your custom JavaScript file -->
+    {{!-- <script src="/public/js/login.js"></script> --}}
+    {{> header}}
+</head>
+ <!-- Include the header partial here -->
+
+<div class="container">
+    {{!-- <h2>Welcome to My Blog!
+
+    </h2> --}}
+
+ {{!-- <article class="login">
+    <h1>Welcome to The Best Tech Blog</h1>
+    <h5>The Best Tech- and The Best Blog - You Get It</h5>
+    <div class="login-card">
+      <h4 class="page-title">Login</h4>
+      <form class="form login-form" id="login-form">
+        <div class="form-group">
+          <label for="email-login">Email:</label>
+          <input class="form-input" type="text" id="email-login" />
+        </div>
+        <div class="form-group">
+          <label for="password-login">Password:</label>
+          <input class="form-input" type="password" id="password-login" />
+        </div>
+        <div class="form-group">
+          <button class="btn btn-primary" type="submit">Login</button>
+          <button class="btn btn-primary" type="submit">Signup</button>
+        </div>
+      </form> 
+    </div>
+  </article> --}}
+
+   {{#unless isAuthenticated}}
+            <!-- Render the login form or login page -->
+            {{> login}}
+        {{/unless}}
+
+    {{#if posts.length}}
+        <ul>
+            {{#each posts}}
+                <li>
+                    <h3>{{title}}</h3>
+                    <p>{{content}}</p>
+                </li>
+            {{/each}}
+        </ul>
+    {{else}}
+        {{!-- <p>No posts found.</p> --}}
+    {{/if}}
+</div>
+
+{{> footer}} <!-- Include the footer partial here --> --}}
