@@ -49,7 +49,7 @@ const loginHandler = async (event) => {
   console.log("Password:", password);
 
   if (email && password) {
-    const response = await fetch("/api/user/login", {
+    const response = await fetch("/api/auth/login", {
       method: "POST",
       body: JSON.stringify({ email, password }),
       headers: { "Content-Type": "application/json" },
@@ -72,3 +72,7 @@ document.getElementById("login-form").addEventListener("submit", loginHandler);
 
 // Add event listener to the login button
 document.getElementById("loginButton").addEventListener("click", loginHandler);
+
+document.getElementById("signupButton").addEventListener("click", () => {
+  document.location.href = "login/signup";
+});
