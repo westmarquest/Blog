@@ -1,5 +1,3 @@
-// signup.js
-
 // Function to handle sign-up form submission
 const signupHandler = async (event) => {
   event.preventDefault();
@@ -13,7 +11,7 @@ const signupHandler = async (event) => {
   if (username && email && password) {
     try {
       // Send a POST request to the server to sign up the user
-      const response = await fetch("/api/user/signup", {
+      const response = await fetch("/signup", {
         method: "POST",
         body: JSON.stringify({ username, email, password }),
         headers: { "Content-Type": "application/json" },

@@ -2,10 +2,16 @@
 
 const homeController = require("./homeController");
 const authController = require("./authController");
-// Import other controllers as needed
+const commentController = require("./commentController");
+const dashboardController = require("./dashboardController");
+const postController = require("./postController");
+const userController = require("./userController");
 
 module.exports = {
   homeController,
   authController,
-  // Export other controllers as needed
+  commentController,
+  dashboardController,
+  postController,
+  userController,
 };

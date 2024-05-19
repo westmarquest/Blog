@@ -5,10 +5,20 @@ const path = require("path");
 const ejs = require("ejs");
 const exphbs = require("express-handlebars");
 const hbs = exphbs.create({});
+const session = require("express-session");
 
 // Create an Express application instance
 const app = express();
+const PORT = process.env.PORT || 3002;
 
+// Set up sessions
+const sess = {
+  secret: "Super secret secret",
+  resave: false,
+  saveUninitialized: false,
+};
+
+app.use(session(sess));
 // // Import models
 // const User = require("./models/User");
 // const Post = require("./models/Post");
@@ -17,6 +27,12 @@ const app = express();
 // Middleware setup
 app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+// Static files
+app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static("js"));
+app.set("views", path.join(__dirname, "views"));
 
 // Use the routes defined in index.js
 const indexRouter = require("./routes/index");
@@ -25,20 +41,15 @@ const dashboardRoutes = require("./routes/dashboardRoutes");
 const postRoutes = require("./routes/postRoutes");
 const commentRoutes = require("./routes/commentRoutes");
 const authRoutes = require("./routes/authRoutes");
+const homeRoutes = require("./routes/homeRoutes");
 
 // Mount routes
-app.use("/api/auth", authRoutes);
-app.use("/api/comments", commentRoutes);
-app.use("/api/dashboard", dashboardRoutes);
-app.use("/api/posts", postRoutes);
+app.use("/", homeRoutes);
+app.use("/", authRoutes);
+app.use("/", commentRoutes);
+app.use("/", dashboardRoutes);
+app.use("/", postRoutes);
 
-app.set("views", path.join(__dirname, "views"));
-
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-// Static files
-app.use(express.static(path.join(__dirname, "public")));
-app.use(express.static("js"));
 // Sync models with the database
 async function syncDatabase() {
   try {
@@ -53,9 +64,12 @@ async function syncDatabase() {
 syncDatabase();
 
 // Start the server
-const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+// const PORT = process.env.PORT || 3001;
+// app.listen(PORT, () => {
+//   console.log(`Server is running on port ${PORT}`);
+// });
+sequelize.sync({ force: false }).then(() => {
+  app.listen(PORT, () => console.log("Now listening"));
 });
 
 module.exports = app;

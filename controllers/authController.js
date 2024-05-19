@@ -29,27 +29,35 @@ const authController = {
 
   login: async (req, res) => {
     try {
+      // Find user by email
       let userData = await User.findOne({ where: { email: req.body.email } });
-      if (!userData) {
-        userData = await User.create(req.body);
-        req.session.logged_in = true; // Set logged_in to true for new users
-      } else {
-        const validPassword = await userData.checkPassword(req.body.password);
 
-        if (!validPassword) {
-          res
-            .status(400)
-            .json({ message: "Incorrect email or password, please try again" });
-          return;
-        }
+      if (!userData) {
+        // If user not found, return error
+        return res.status(400).json({ message: "Incorrect email or password" });
       }
-      console.log("userData", userData);
-      req.session.save(() => {
-        req.session.user_id = userData.id;
-        res.json({ user: userData, message: "You are now logged in!" });
-      });
+
+      // Check if password is valid
+      const validPassword = await bcrypt.compare(
+        req.body.password,
+        userData.password
+      );
+
+      if (!validPassword) {
+        // If password is invalid, return error
+        return res.status(400).json({ message: "Incorrect email or password" });
+      }
+
+      // Save user id in session
+      req.session.user_id = userData.id;
+      req.session.logged_in = true;
+
+      // Send success message
+      res.json({ user: userData, message: "You are now logged in!" });
     } catch (err) {
-      res.status(400).json(err);
+      // Handle other errors
+      console.error(err);
+      res.status(500).json({ message: "Internal server error" });
     }
   },
 

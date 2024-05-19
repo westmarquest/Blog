@@ -22,5 +22,3 @@ const dashboardController = {
 };
 
 module.exports = dashboardController;
-
-module.exports = dashboardController;
