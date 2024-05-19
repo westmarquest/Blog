@@ -48,7 +48,7 @@ app.use("/", homeRoutes);
 app.use("/", authRoutes);
 app.use("/comment", commentRoutes);
 app.use("/dashboard", dashboardRoutes);
-app.use("/", postRoutes);
+app.use("/post", postRoutes);
 
 // Sync models with the database
 async function syncDatabase() {
