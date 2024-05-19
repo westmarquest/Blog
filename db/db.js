@@ -25,7 +25,20 @@ const postDb = new Sequelize(
   }
 );
 
+// Initialize Sequelize instance for comments database
+const commentDb = new Sequelize(
+  process.env.COMMENT_DB_NAME,
+  process.env.COMMENT_DB_USER,
+  process.env.COMMENT_DB_PASSWORD,
+  {
+    host: process.env.COMMENT_DB_HOST || "localhost",
+    dialect: "mysql",
+    port: process.env.COMMENT_DB_PORT || 3306,
+  }
+);
+
 module.exports = {
   userDb,
   postDb,
+  commentDb,
 };

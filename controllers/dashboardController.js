@@ -1,3 +1,4 @@
+const { userDb, postDb, commentDb } = require("../db/db");
 const User = require("../models/User");
 const Post = require("../models/Post");
 const Comment = require("../models/Comment");
@@ -7,9 +8,15 @@ const dashboardController = {
     try {
       // Fetch data needed for the dashboard
       const userId = req.session.user_id;
-      const user = await User.findByPk(userId);
-      const userPosts = await Post.findAll({ where: { userId } });
-      const userComments = await Comment.findAll({ where: { userId } });
+      const user = await User.findOne({ where: { id: userId }, using: userDb });
+      const userPosts = await Post.findAll({
+        where: { userId },
+        using: postDb,
+      });
+      const userComments = await Comment.findAll({
+        where: { userId },
+        using: commentDb,
+      });
 
       // Render the dashboard template and pass the fetched data to it
       res.render("dashboard", { user, userPosts, userComments });
