@@ -36,19 +36,21 @@ app.set("views", path.join(__dirname, "views"));
 
 // Use the routes defined in index.js
 const indexRouter = require("./routes/index");
-app.use(indexRouter);
-const dashboardRoutes = require("./routes/dashboardRoutes");
-const postRoutes = require("./routes/postRoutes");
-const commentRoutes = require("./routes/commentRoutes");
-const authRoutes = require("./routes/authRoutes");
-const homeRoutes = require("./routes/homeRoutes");
 
-// Mount routes
-app.use("/", homeRoutes);
-app.use("/", authRoutes);
-app.use("/comment", commentRoutes);
-app.use("/dashboard", dashboardRoutes);
-app.use("/post", postRoutes);
+// Use the main router
+app.use("/", indexRouter);
+// const dashboardRoutes = require("./routes/dashboardRoutes");
+// const postRoutes = require("./routes/postRoutes");
+// const commentRoutes = require("./routes/commentRoutes");
+// const authRoutes = require("./routes/authRoutes");
+// const homeRoutes = require("./routes/homeRoutes");
+
+// // Mount routes
+// app.use("/", homeRoutes);
+// app.use("/", authRoutes);
+// app.use("/comment", commentRoutes);
+// app.use("/dashboard", dashboardRoutes);
+// app.use("/post", postRoutes);
 
 // Sync models with the database
 async function syncDatabase() {
@@ -63,11 +65,6 @@ async function syncDatabase() {
 // Call syncDatabase function before starting the server
 syncDatabase();
 
-// Start the server
-// const PORT = process.env.PORT || 3001;
-// app.listen(PORT, () => {
-//   console.log(`Server is running on port ${PORT}`);
-// });
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log("Now listening"));
 });

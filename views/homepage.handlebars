@@ -7,7 +7,7 @@
   </head>
   <body>
     <header>
-      <nav>
+      {{!-- <nav>
         <ul>
           <li><a href="/">Home</a></li>
           <li>
@@ -26,11 +26,12 @@
           </li>
 
         </ul>
-      </nav>
+      </nav> --}}
+      {{> header}} 
     </header>
 
     <main>
-      <h1>Welcome to the Blog</h1>
+      <h1>Welcome!</h1>
 
       {{#if posts.length}}
         <section id="posts">

@@ -19,7 +19,7 @@ const loginHandler = async (event) => {
 
       if (response.ok) {
         console.log("Login successful");
-        document.location.replace("/dashboard"); // Redirect to the dashboard upon successful login
+        window.location.href = "/dashboard"; // Redirect to the dashboard upon successful login
       } else {
         console.log("Login failed");
         alert("Failed to log in.");

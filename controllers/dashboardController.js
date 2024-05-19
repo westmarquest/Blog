@@ -8,13 +8,16 @@ const dashboardController = {
     try {
       // Fetch data needed for the dashboard
       const userId = req.session.user_id;
-      const user = await User.findOne({ where: { id: userId }, using: userDb });
+      const user = await User.findOne({
+        where: { id: userId },
+        using: userDb,
+      });
       const userPosts = await Post.findAll({
-        where: { userId },
+        where: { id: userId },
         using: postDb,
       });
       const userComments = await Comment.findAll({
-        where: { userId },
+        where: { id: userId },
         using: commentDb,
       });
 
@@ -30,7 +33,7 @@ const dashboardController = {
   fetchUserPosts: async (req, res) => {
     try {
       const userId = req.session.user_id;
-      const userPosts = await Post.findAll({ where: { userId } });
+      const userPosts = await Post.findAll({ where: { id: userId } });
       res.status(200).json({ userPosts });
     } catch (error) {
       console.error("Error fetching user posts:", error);
@@ -42,7 +45,7 @@ const dashboardController = {
   fetchUserComments: async (req, res) => {
     try {
       const userId = req.session.user_id;
-      const userComments = await Comment.findAll({ where: { userId } });
+      const userComments = await Comment.findAll({ where: { id: userId } });
       res.status(200).json({ userComments });
     } catch (error) {
       console.error("Error fetching user comments:", error);
@@ -53,6 +56,7 @@ const dashboardController = {
   // Function to populate user posts
   populateUserPosts: async (req, res) => {
     try {
+      const userId = req.session.user_id;
       const userPosts = await Post.findAll({
         where: { userId: req.session.user_id },
       });
@@ -66,6 +70,7 @@ const dashboardController = {
   // Function to populate user comments
   populateUserComments: async (req, res) => {
     try {
+      const userId = req.session.user_id;
       const userComments = await Comment.findAll({
         where: { userId: req.session.user_id },
       });

@@ -1,5 +1,9 @@
 const express = require("express");
 const router = express.Router();
+const { userDb, postDb, commentDb } = require("../db/db");
+const User = require("../models/User");
+const Post = require("../models/Post");
+const Comment = require("../models/Comment");
 
 // Controller to render the homepage
 const renderHome = async (req, res) => {
@@ -9,7 +13,6 @@ const renderHome = async (req, res) => {
       order: [["createdAt", "DESC"]],
     });
     res.render("homepage", {
-      user: req.session.user,
       posts: posts.map((post) => post.get({ plain: true })),
     });
   } catch (error) {
