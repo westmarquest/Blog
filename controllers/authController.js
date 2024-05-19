@@ -37,13 +37,8 @@ const authController = {
         return res.status(400).json({ message: "Incorrect email or password" });
       }
 
-      // Check if password is valid
-      const validPassword = await bcrypt.compare(
-        req.body.password,
-        userData.password
-      );
-
-      if (!validPassword) {
+      // Check if password is valid directly on userData
+      if (userData.checkPassword(req.body.password)) {
         // If password is invalid, return error
         return res.status(400).json({ message: "Incorrect email or password" });
       }

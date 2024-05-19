@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const { Post } = require("../models");
 
 // Controller to render the homepage
 const renderHome = async (req, res) => {

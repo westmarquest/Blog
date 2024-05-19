@@ -3,7 +3,7 @@
 const homeController = require("./homeController");
 const authController = require("./authController");
 const commentController = require("./commentController");
-const dashboardController = require("./dashboardController");
+const dashboardController = require("./dashboardController").default;
 const postController = require("./postController");
 const userController = require("./userController");
 

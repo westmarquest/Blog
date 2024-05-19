@@ -6,12 +6,24 @@
     <button class ="btn save" id="saveBtn">Save</button>
   </nav>
 
-{{> header}} <!-- Include the header partial here -->
+{{> header}} 
 
 <div class="container">
     
-<h2>user Dashboard</h2>
-    <!-- Add content for the dashboard here -->
+<div class="container">
+    <h2>User Dashboard</h2>
+
+    <div id="user-posts">
+        <h3>User Posts</h3>
+        <div id="user-posts-content"></div>
+    </div>
+    
+    <div id="user-comments">
+        <h3>User Comments</h3>
+        <div id="user-comments-content"></div>
+    </div>
 </div>
 
-{{> footer}} <!-- Include the footer partial here -->
+
+{{> footer}} 
+<script src="../public/js/dashboard.js"></script>

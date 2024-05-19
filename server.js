@@ -46,8 +46,8 @@ const homeRoutes = require("./routes/homeRoutes");
 // Mount routes
 app.use("/", homeRoutes);
 app.use("/", authRoutes);
-app.use("/", commentRoutes);
-app.use("/", dashboardRoutes);
+app.use("/comment", commentRoutes);
+app.use("/dashboard", dashboardRoutes);
 app.use("/", postRoutes);
 
 // Sync models with the database
