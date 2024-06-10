@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const dashboardController = require("../controllers/dashboardController");
+const dashboardController = require("../../controllers/dashboardController");
 
 // Dashboard route - protected route
 router.get("/dashboard", dashboardController.renderDashboard);

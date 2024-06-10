@@ -1,5 +1,5 @@
 const { Model, DataTypes } = require("sequelize");
-const sequelize = require("../config/config");
+const sequelize = require("../config/connection");
 
 class Comment extends Model {}
 
@@ -27,3 +27,13 @@ Comment.init(
 );
 
 module.exports = Comment;
+
+// const commentSchema = new Schema({
+//   text: String,
+//   username: String,
+// });
+
+// // Initialize the Comment model
+// const Comment = model('comment', commentSchema);
+
+// module.exports = Comment;

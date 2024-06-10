@@ -18,8 +18,14 @@ const loginHandler = async (event) => {
       console.log("Response:", response);
 
       if (response.ok) {
+        const data = await response.json();
+        const token = data.token; // Assuming the server sends back a token in the response
+
+        // Store the token in local storage
+        localStorage.setItem("token", token);
+
         console.log("Login successful");
-        window.location.href = "/dashboard"; // Redirect to the dashboard upon successful login
+        window.location.href = "/home"; // Redirect to the dashboard upon successful login
       } else {
         console.log("Login failed");
         alert("Failed to log in.");

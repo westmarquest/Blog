@@ -1,6 +1,6 @@
 // Import required modules
 const express = require("express");
-const sequelize = require("./config/config");
+const sequelize = require("./config/connection");
 const path = require("path");
 const ejs = require("ejs");
 const exphbs = require("express-handlebars");
@@ -31,7 +31,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // Static files
 app.use(express.static(path.join(__dirname, "public")));
-app.use(express.static("js"));
+// app.use(express.static(path.join(__dirname, "js")));
+// app.use(express.static(path.join(__dirname, "public/css")));
 app.set("views", path.join(__dirname, "views"));
 
 // Use the routes defined in index.js
@@ -39,18 +40,16 @@ const indexRouter = require("./routes/index");
 
 // Use the main router
 app.use("/", indexRouter);
-// const dashboardRoutes = require("./routes/dashboardRoutes");
-// const postRoutes = require("./routes/postRoutes");
-// const commentRoutes = require("./routes/commentRoutes");
-// const authRoutes = require("./routes/authRoutes");
-// const homeRoutes = require("./routes/homeRoutes");
 
-// // Mount routes
-// app.use("/", homeRoutes);
-// app.use("/", authRoutes);
-// app.use("/comment", commentRoutes);
-// app.use("/dashboard", dashboardRoutes);
-// app.use("/post", postRoutes);
+app.use((req, res, next) => {
+  res.locals.user = req.session.user || null;
+  next();
+});
+
+// app.get("/public/js/dashboard.js", (req, res) => {
+//   res.set("Content-Type", "text/javascript");
+//   res.sendFile(path.join(__dirname, "public", "js", "dashboard.js"));
+// });
 
 // Sync models with the database
 async function syncDatabase() {
@@ -62,11 +61,23 @@ async function syncDatabase() {
   }
 }
 
+// Serve static files with correct Content-Type
+app.use(
+  "/public/js",
+  express.static(path.join(__dirname, "public/js"), {
+    setHeaders: (res, path) => {
+      if (path.endsWith(".js")) {
+        res.set("Content-Type", "text/javascript");
+      }
+    },
+  })
+);
+
 // Call syncDatabase function before starting the server
 syncDatabase();
 
 sequelize.sync({ force: false }).then(() => {
-  app.listen(PORT, () => console.log("Now listening"));
+  app.listen(PORT, () => console.log(`Now listening at ${PORT}`));
 });
 
 module.exports = app;

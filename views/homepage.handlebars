@@ -3,52 +3,47 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Homepage</title>
-    <link rel="stylesheet" href="../public/css/style.css" />
   </head>
   <body>
     <header>
-      {{!-- <nav>
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li>
-            {{#if user}}
-              <a href="/api/dashboard">Dashboard</a>
-            {{else}}
-              <a href="/api/auth/login">Dashboard</a>
-            {{/if}}
-          </li>
-          <li>
-            {{#if user}}
-              <a href="/api/auth/logout">Logout</a>
-            {{else}}
-              <a href="/api/auth/login">Login</a>
-            {{/if}}
-          </li>
-
-        </ul>
-      </nav> --}}
+    
       {{> header}} 
     </header>
 
     <main>
       <h1>Welcome!</h1>
+{{!-- {{#if user}}
+        <button id="create-post-button">Create Post</button>
+        <div id="form-container"></div>
+      {{else}}
+       <button id="to-post-button">Please log in to create a post</button>
+      {{/if}}
 
       {{#if posts.length}}
         <section id="posts">
           {{#each posts}}
             <article class="post">
-              <h2><a href="/posts/{{this.id}}">{{this.title}}</a></h2>
+              <h2><a href="/posts">{{this.title}}</a></h2>
               <p>Posted on {{this.createdAt}}</p>
             </article>
           {{/each}}
         </section>
       {{else}}
         <p>No blog posts have been published yet.</p>
-      {{/if}}
+      {{/if}} --}}
+
+
+      <h1>All Posts</h1>
+<ul>
+    {{#each posts}}
+        <li><a href="/post/{{this.id}}">{{this.title}}</a></li>
+    {{/each}}
+</ul>
     </main>
 
     <footer>
-      <p>&copy; 2024 Blog Site</p>
+     {{> footer}} 
     </footer>
+     <script src="../public/js/home.js"></script>
   </body>
 </html>

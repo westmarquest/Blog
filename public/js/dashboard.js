@@ -11,7 +11,7 @@ window.addEventListener("DOMContentLoaded", () => {
     .then((response) => response.json())
     .then((data) => {
       // Call the function to populate user posts
-      populateUserPosts(data.userPosts);
+      fetchUserPosts(data.userPosts);
     })
     .catch((error) => {
       console.error("Error fetching user posts:", error);
@@ -21,7 +21,7 @@ window.addEventListener("DOMContentLoaded", () => {
     .then((response) => response.json())
     .then((data) => {
       // Call the function to populate user comments
-      populateUserComments(data.userComments);
+      fetchUserComments(data.userComments);
     })
     .catch((error) => {
       console.error("Error fetching user comments:", error);
@@ -60,10 +60,10 @@ const fetchUserComments = (userComments) => {
   }
 };
 
-const dashboard = {
-  fetchUserPosts,
-  fetchUserComments,
-};
+// const dashboard = {
+//   fetchUserPosts,
+//   fetchUserComments,
+// };
 
-// Export the dashboard object
-module.exports = dashboard;
+// // Export the dashboard object
+// module.exports = dashboard;

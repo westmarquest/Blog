@@ -1,24 +1,25 @@
 <!-- header.hbs -->
 <header>
-  <h1>The "Best" Blog</h1>
+
   <nav>
     <ul>
-      <li><a href="/">Home</a></li>
+      <li><a href="/home">Home</a></li>
       <li>
         {{#if user}}
-          <a href="/api/dashboard">Dashboard</a>
+          <a href="/dashboard">Dashboard</a>
         {{else}}
           <a href="/login">Dashboard</a>
         {{/if}}
       </li>
       <li>
         {{#if user}}
-          <a href="/logout">Logout</a>
+          <a href="/logout" class="logout-link">Logout</a>
         {{else}}
-          <a href="/login">Login</a>
+          <a href="/login" class="login-link">Login</a>
         {{/if}}
       </li>
 
     </ul>
   </nav>
+
 </header>

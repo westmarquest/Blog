@@ -2,7 +2,7 @@
 
 const withAuth = require("../utils/auth");
 const User = require("../models/User");
-const bcrypt = require("bcrypt");
+const bcryptjs = require("bcryptjs");
 
 const authController = {
   renderSignup: async (req, res) => {
@@ -11,7 +11,7 @@ const authController = {
 
   newUser: async (req, res) => {
     try {
-      const hashedPassword = await bcrypt.hash(req.body.password, 10);
+      const hashedPassword = await bcryptjs.hash(req.body.password, 10);
       const newUser = await User.create({
         username: req.body.username,
         email: req.body.email,
@@ -59,7 +59,7 @@ const authController = {
   logout: async (req, res) => {
     if (req.session.logged_in) {
       req.session.destroy(() => {
-        res.status(204).end();
+        res.redirect("/");
       });
     } else {
       res.status(404).end();

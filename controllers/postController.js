@@ -1,44 +1,41 @@
 const express = require("express");
 const router = express.Router();
-const Post = require("../models/Post");
-const User = require("../models/User");
+const { userDb, postDb, commentDb } = require("../db/db");
+const { Post } = require("../models/Post");
+const { User } = require("../models/User");
 
-// Route to create a new post
 const postController = {
   // Route to retrieve all posts
   allPosts: async (req, res) => {
     try {
-      const posts = await Post.findAll();
-      res.status(200).json(posts);
-    } catch (error) {
-      console.error("Error fetching posts:", error);
-      res.status(500).json({ error: "Internal Server Error" });
+      const posts = await Post.find();
+      res.json(posts);
+    } catch (err) {
+      res.status(500).json(err);
     }
   },
 
   // Route to retrieve a specific post by ID
   onePost: async (req, res) => {
-    const postId = req.params.id;
     try {
-      const post = await Post.findByPk(postId);
+      const post = await Post.findOne({ _id: req.params.postId });
+
       if (!post) {
-        return res.status(404).json({ error: "Post not foundd" });
+        return res.status(404).json({ message: "No post with that ID" });
       }
-      res.status(200).json(post);
-    } catch (error) {
-      console.error("Error fetching post:", error);
-      res.status(500).json({ error: "Internal Server Error" });
+
+      res.json(post);
+    } catch (err) {
+      res.status(500).json(err);
     }
   },
 
   newPost: async (req, res) => {
     try {
-      // Assuming req.body contains the necessary data for creating a new post
-      const newPost = await Post.create(req.body);
-      res.status(201).json(newPost);
-    } catch (error) {
-      console.error("Error creating post:", error);
-      res.status(500).json({ error: "Internal Server Error" });
+      const PostData = await Post.create(req.body);
+      res.json(PostData);
+    } catch (err) {
+      res.status(500).json(err);
     }
   },
 
